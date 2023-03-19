@@ -145,6 +145,7 @@ void ListDelete_Sq(SqList &L,int i,char &e){
 	
 }
 
+
 //销毁结构操作
 void DestroyList_Sq(SqList &L){
 	
@@ -192,6 +193,7 @@ void ClearList_Sq(SqList &L){
 	
 } 
 
+
 //判断是否为空表
 bool ListEmpty(SqList L){
 
@@ -220,6 +222,7 @@ ElemType GetElem_Sq(SqList L,int i, ElemType e){
 		return e;
 	}
 }
+ 
  
 //获取前驱
 ElemType PriorElem_Sq(SqList L,ElemType cur_e,ElemType &pre_e){

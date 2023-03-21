@@ -63,8 +63,8 @@ int main(){
 	ListDelete_L(L,q);
 	cout<<"删除结点后，单链表输出:"<<endl;
 	ListTraverse_L(L);
-	cout<<"长度："<<ListLength_L(L)<<endl;
-	delete s;
+	
+	
 }
 
 //线性表基本操作 
@@ -126,9 +126,8 @@ void ListDelete_L(LinkList L,LNode *p){
 void CreateList_L(LinkList &L,ElemType *A,int n){
 	int i;
 	LNode *s;
-	
-	L = NULL;
 	/*
+	L = NULL;
 	s->date=A[n-1];
 	s->next=L;
 	L=s;

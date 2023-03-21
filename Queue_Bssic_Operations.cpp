@@ -69,10 +69,27 @@ bool DeQueue_L(LinkQueue &Q,QElemType &e){
 	LNode *p;
 	
 	if(Q.front==Q.rear) return FALSE;
-	p=Q.front->next;
-	e=p->date;
-	Q.front->next=p->next;
+	else{
+		p=Q.front->next;
+		e=p->date;
+		Q.front->next=p->next;	
+	}
+
 	
 	delete p;
 	return TRUE; 
 }//DeQueue_L
+
+
+//±éÀúÊä³ö 
+void QueueTraverse_L(QueuePtr L){
+	LNode *p;
+	p=L;
+	while(p){
+		cout<<p->date<<endl;
+		p=p->next;
+	}
+}
+ 
+
+

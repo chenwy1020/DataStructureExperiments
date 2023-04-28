@@ -5,7 +5,6 @@
 #include<iostream>
 using namespace std; 
 
-
 const int LISTINIT_SIZE=100;
 const int LISTINCREMENT=10;
 const bool TRUE=1;
@@ -72,15 +71,18 @@ int main(){
 
 //创建双向循环链表 
 void CreateList_DuL(DuLinkList &L,ElemType *A,int n){
-	int i;
+
 	DuLNode *s;	
-	L->prior=L;
+	
+	//初始化 
+	L=new DuLNode;
+	L->prior=L; 
 	L->next=L;
 	
-	for(i=n-1;i>=0;--i){
+	//赋值 
+	for(int i=n-1;i>=0;--i){
 		s=new DuLNode;
 		s->date=A[i];
-		//printf("3");
 		s->prior=L->prior;
 		L->prior->next=s;
 		s->next=L;
@@ -105,7 +107,7 @@ int ListLength_DuL(DuLinkList L){
 
 //查找元素
 DuLinkList LocateElem_DuL(DuLinkList L,ElemType e){
-	DuLinkList p;
+	DuLNode* p;
 	p=L;
 	while(p->next!=L && p->date!=e) p=p->next;
 	if(p->next==L) cout<<"无该结点"<<endl; 

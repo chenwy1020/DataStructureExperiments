@@ -28,18 +28,26 @@ typedef struct {
 //º¯ÊýÉùÃ÷ 
 void SelectPass(SqList &L,int i); 
 void SelectSort(SqList &L);
+
 void InsertPass(SqList &L,int i);
 void InsertSort(SqList &L);
+
 void BubbleSort(SqList &L);
+
 int Partition(RcdType R[], int low, int high);
 void Qsort(RcdType R[], int s,int t);
 void QuickSort(SqList &L);
 
+void Merge(RcdType SR[], RcdType TR[], int i, int m, int n);
+void Msort(RcdType SR[], RcdType TR1[], int s,int t);
+void MergeSort(SqList &L);
+
+
 int main(){
-	SqList L,M,N,P;
+	SqList L,M,N,O,P;
 
 	//L.r=new RcdType[MAXSIZE+1];
-	L.length=8; M.length=8; N.length=8; P.length=8; 
+	L.length=8; M.length=8; N.length=8; O.length=8; P.length=8; 
 	
 	L.r[1].key=49;	
 	L.r[2].key=38;	
@@ -53,9 +61,12 @@ int main(){
     for(int i=1; i<=8; i++){
     	M.r[i].key=L.r[i].key;
     	N.r[i].key=L.r[i].key;
+    	O.r[i].key=L.r[i].key;
     	P.r[i].key=L.r[i].key;
 	}
-	//-------------------------------------- 
+	
+	
+	//------------------------------------------------------- 
 	printf("Ñ¡ÔñÅÅÐò\n");
 	cout<<"ÅÅÐòÇ°"<<endl; 
 	for(int i=1;i<=L.length; i++){
@@ -67,7 +78,8 @@ int main(){
 		cout<<L.r[i].key<<"  "<<endl;
 	}
 	
-	//---------------------------------------- 
+	
+	//-------------------------------------------------------- 
 	printf("\n\n\n²åÈëÅÅÐò\n");
 	cout<<"ÅÅÐòÇ°"<<endl; 
 	for(int i=1;i<=M.length; i++){
@@ -79,7 +91,8 @@ int main(){
 		cout<<M.r[i].key<<"  "<<endl;
 	}
 	
-	//---------------------------------------- 
+	
+	//------------------------------------------------------- 
 	printf("\n\n\nÃ°ÅÝÅÅÐò\n");
 	cout<<"ÅÅÐòÇ°"<<endl; 
 	for(int i=1;i<=N.length; i++){
@@ -91,17 +104,32 @@ int main(){
 		cout<<N.r[i].key<<"  "<<endl;
 	}
 	
-	//------------------------------------------ 
+	
+	//------------------------------------------------------- 
 	printf("\n\n\n¿ìËÙÅÅÐò\n");
+	cout<<"ÅÅÐòÇ°"<<endl; 
+	for(int i=1;i<=O.length; i++){
+		cout<<O.r[i].key<<"  "<<endl;
+	}
+	QuickSort(O);
+		cout<<"ÅÅÐòºó"<<endl;
+	for(int i=1;i<=O.length; i++){
+		cout<<O.r[i].key<<"  "<<endl;
+	}
+	
+	
+	//------------------------------------------ 
+	printf("\n\n\n¹é²¢ÅÅÐò\n");
 	cout<<"ÅÅÐòÇ°"<<endl; 
 	for(int i=1;i<=P.length; i++){
 		cout<<P.r[i].key<<"  "<<endl;
 	}
-	QuickSort(P);
+	MergeSort(P);
 		cout<<"ÅÅÐòºó"<<endl;
 	for(int i=1;i<=P.length; i++){
 		cout<<P.r[i].key<<"  "<<endl;
 	}
+	
 
 }
 
@@ -123,6 +151,7 @@ void SelectPass(SqList &L,int i){
 	
 }// SelectPass
 
+//Ë³Ðò±íµÄÑ¡ÔñÅÅÐò 
 void SelectSort(SqList &L){
 	RcdType W;
 	int j;
@@ -149,6 +178,7 @@ void InsertPass(SqList &L,int i){
 
 	L.r[j+1]=L.r[j];
 }//InsertPass
+
 
 //Ë³Ðò±íµÄ²åÈëÅÅÐò 
 void InsertSort(SqList &L){
@@ -181,6 +211,7 @@ void BubbleSort(SqList &L){
 	}//while 
 } //BubbleSort
 
+
 //¿ìËÙÅÅÐòËã·¨
 int Partition(RcdType R[], int low, int high){
 	R[0]=R[low];
@@ -211,8 +242,36 @@ void QuickSort(SqList &L){
 	Qsort(L.r,1,L.length);
 }//QuickSort
 
+ 
+//¹é²¢ÅÅÐò
+void Merge(RcdType SR[], RcdType TR[], int i, int m, int n){
+	int j=m+1;
+	int k;
+	for(j=m+1,k=i; i<=m && j<=n; k++){
+		if(SR[i].key<=SR[j].key) TR[k]=SR[i++];
+		else TR[k]=SR[j++];
+	}//for
+	while(i<=m) TR[k++]=SR[i++];
+	while(j<=n) TR[k++]=SR[j++];
+	
+} //Merge
 
+void Msort(RcdType SR[], RcdType TR1[], int s,int t){
+	RcdType TR2[t-s+1];
+	int m;
+	if(s==t) TR1[s]=SR[s];
+	else{
+		m=(s+t)/2;
+		Msort(SR,TR2,s,m);
+		Msort(SR,TR2,m+1,t);
+		Merge(TR2,TR1,s,m,t);
+	}//else
+	
+}//Msort
 
+void MergeSort(SqList &L){
+	Msort(L.r, L.r, 1, L.length);
+}//MergeSort
 
 
 

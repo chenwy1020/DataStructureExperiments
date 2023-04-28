@@ -159,11 +159,12 @@ void Stack_Traverse_Sq(SqStack S){
 
 
 //链栈的基本操作
+//初始化 
 void InitStack_L(LinkStack &S){
 	S=NULL;
 }//InitStack_L
 
-
+//元素入栈 
 void Push_L(LinkStack &S,ElemType e){
 	LNode *p;
 	p=new LNode;
@@ -173,7 +174,7 @@ void Push_L(LinkStack &S,ElemType e){
 	
 }//Push_L
 
-
+//栈顶元素出栈 
 bool Pop_L(LinkStack &S,ElemType &e){
 	if(S==NULL) return FALSE;
 	else{

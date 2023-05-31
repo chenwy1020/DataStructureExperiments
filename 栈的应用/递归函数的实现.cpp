@@ -113,5 +113,6 @@ int Ackerman(int n,int x,int y){
 }//Ackerman
 
 int main(){
+	cout<<"Ackerman(3,2,1) = "; 
 	cout<<Ackerman(3,2,1)<<endl;
 }

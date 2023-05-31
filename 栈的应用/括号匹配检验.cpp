@@ -7,9 +7,14 @@ bool matching(char exp[]);
 
 int main(){
 	
-	char w[9]={'(','(','[',']','{','}',')',')','#'};
+	char w[10]={'(','(','[',']','{','}',')',')','#'};
+	char x[10]={'(','(','[',')','{','}',')',')','#'};
 	
+	printf("%s\n",w);
 	cout<<matching(w)<<endl;
+	
+	printf("%s\n",x);
+	cout<<matching(x)<<endl;
 
 }
 

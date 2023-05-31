@@ -45,14 +45,18 @@ int main(){
 	L.elem[3]='d';
 	L.length=4;
 	
+	cout<<"顺序表为：           "; 
 	ListTraverse_Sq(L);
 	
+	cout<<"查找'c'的位序：      "; 
 	printf("%d\n",LocateElem_Sq(L,'c'));
 	
+	cout<<"插入'f'后，顺序表为：";
 	ListInsert_Sq(L,5,'f');
 	
 	ListTraverse_Sq(L); 
 	
+	cout<<"逆置后，顺序表为:    ";
 	invert(L.elem,0,4);
 	ListTraverse_Sq(L); 
 	
@@ -250,9 +254,5 @@ ElemType NextElem_Sq(SqList L,ElemType cur_e,ElemType &next_e){
 		return next_e;
 	}
 }
-
-
-
-
 
 

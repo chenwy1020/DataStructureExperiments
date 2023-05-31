@@ -10,6 +10,11 @@ int main(){
 
 	int T=10;
 	int w[6]={1,8,4,3,5,2};//背包 
+	printf("物品大小：");
+	for (int i=0; i<6; i++)
+		printf("%d ", *(w + i));
+	printf("\n");
+
 	cout<<"全部解在背包的位序"<<endl; 
 	knapsack(w,T,6);
 
@@ -32,6 +37,7 @@ void knapsack(int* w,int T,int n){
 				T-=w[k];
 			}
 			k++;
+			
 		}//while 第k件可选，则入栈 
 		
 		if(T==0) {

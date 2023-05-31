@@ -36,7 +36,7 @@ int main(){
 	//printf("1");
 	CreateList_DuL(L,A,4);
 	//printf("2");
-	cout<<"双向循环链表输出:"<<endl;
+	cout<<"双向循环链表输出:";
 	ListTraverse_DuL(L);
 	
 	cout<<"长度："<<ListLength_DuL(L)<<endl;
@@ -51,7 +51,7 @@ int main(){
 				//new命令 建造了一间新房子，并把这个的地址返回房间簿，
 	s->date=0; //等价于(*s).date=0;
 	ListInsert_DuL(L,p,s);
-	cout<<"插入结点后，双向循环链表输出:"<<endl;
+	cout<<"插入结点后，双向循环链表输出:";
 	ListTraverse_DuL(L);
 	cout<<"长度："<<ListLength_DuL(L)<<endl;
 	
@@ -61,7 +61,7 @@ int main(){
 	cout<<"获取数据为2的结点，它的数据为:"<<q->date<<endl;
 	//printf("陈文宇"); 
 	ListDelete_DuL(L,q,e);
-	cout<<"删除结点后，双向循环链表输出:"<<endl;
+	cout<<"删除结点后，双向循环链表输出:";
 	ListTraverse_DuL(L);
 	cout<<"长度："<<ListLength_DuL(L)<<endl;
 	
@@ -148,33 +148,11 @@ void ListTraverse_DuL(DuLinkList L){
 	DuLNode *p;
 	p=L;
 	while(p->next !=L ){
-		cout<<p->date<<endl;
+		cout<<p->date<<" ";
 		p=p->next;
 	}
+	cout<<endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

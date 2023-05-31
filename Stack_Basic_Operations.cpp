@@ -1,7 +1,6 @@
 //ЁбндсН
 //10200115 
 
-//#include"stdafx .h"
 #include<iostream>
 using namespace std; 
 

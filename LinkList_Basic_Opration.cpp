@@ -36,7 +36,7 @@ int main(){
 	
 	CreateList_L(L,A,3);
 	//printf("2");
-	cout<<"单链表输出:"<<endl;
+	cout<<"单链表输出:";
 	ListTraverse_L(L);
 	
 	cout<<"长度："<<ListLength_L(L)<<endl;
@@ -51,7 +51,7 @@ int main(){
 				//new命令 建造了一间新房子，并把这个的地址返回房间簿，
 	(*s).date=0;//等价于s->date=0; 
 	LinkInsert_L(L,p,s);
-	cout<<"插入结点后，单链表输出:"<<endl;
+	cout<<"插入结点后，单链表输出:";
 	ListTraverse_L(L);
 	cout<<"长度："<<ListLength_L(L)<<endl;
 	
@@ -61,7 +61,7 @@ int main(){
 	cout<<"获取数据为2的结点，它的数据为:"<<q->date<<endl;
 	//printf("陈文宇"); 
 	ListDelete_L(L,q);
-	cout<<"删除结点后，单链表输出:"<<endl;
+	cout<<"删除结点后，单链表输出:";
 	ListTraverse_L(L);
 	cout<<"长度："<<ListLength_L(L)<<endl;
 	delete s;
@@ -151,88 +151,10 @@ void ListTraverse_L(LinkList L){
 	LNode *p;
 	p=L;
 	while(p){
-		cout<<p->date<<endl;
+		cout<<p->date<<" ";
 		p=p->next;
 	}
+	cout<<endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

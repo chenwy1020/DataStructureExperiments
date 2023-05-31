@@ -1,7 +1,6 @@
 //≥¬Œƒ”Ó
 //10200115 
 
-//#include"stdafx .h"
 #include<iostream>
 using namespace std; 
 
@@ -26,163 +25,192 @@ typedef struct {
 
 
 //∫Ø ˝…˘√˜ 
-void SelectPass(SqList &L,int i); 
+void SelectPass(SqList &L,int i); //—°‘Ò≈≈–Ú 
 void SelectSort(SqList &L);
 
-void InsertPass(SqList &L,int i);
+void InsertPass(SqList &L,int i); //≤Â»Î≈≈–Ú 
 void InsertSort(SqList &L);
 
-void BubbleSort(SqList &L);
+void BubbleSort(SqList &L);		//√∞≈›≈≈–Ú 
 
 int Partition(RcdType R[], int low, int high);
 void Qsort(RcdType R[], int s,int t);
-void QuickSort(SqList &L);
+void QuickSort(SqList &L);	//øÏÀŸ≈≈–Ú 
 
-void Merge(RcdType SR[], RcdType TR[], int i, int m, int n);
+void Merge(RcdType SR[], RcdType TR[], int i, int m, int n);	//πÈ≤¢≈≈–Ú 
 void Msort(RcdType SR[], RcdType TR1[], int s,int t,int n);
 void MergeSort(SqList &L);
 
-void MaxHead(SqList &L,int s,int t);
+void MaxHead(SqList &L,int s,int t);	//∂—≈≈–Ú 
 void HeadSort(SqList &L);
 
-void RadixPass1(RcdType A[],RcdType B[],int n);
+void RadixPass1(RcdType A[],RcdType B[],int n);		//ª˘ ˝≈≈–Ú 
 void RadixPass2(RcdType A[],RcdType B[],int n);
 void RadixSort(SqList &L);
 
 
-void counting_sort(RcdType A[], RcdType B[], int n, int m);
+void counting_sort(RcdType A[], RcdType B[], int n, int m); //º∆ ˝≈≈–Ú 
 void CountingSort(SqList &L);
 
-void ShellSort(SqList &L);
+void ShellSort(SqList &L);	//œ£∂˚≈≈–Ú 
 
 int main(){
-	int n=12,m=8;
+	int n=12,m=20;
 	SqList* A;
 	A=(SqList*)malloc(sizeof(SqList)*n); 
 	for(int i=0;i<n;i++){
 		A[i].length=m;
-		A[i].r[1].key=49;
-		A[i].r[2].key=38;
-		A[i].r[3].key=65;
-		A[i].r[4].key=49;
-		A[i].r[5].key=76;
-		A[i].r[6].key=13;
-		A[i].r[7].key=27;
-		A[i].r[8].key=52;
+		A[i].r[1 ].key=35;
+		A[i].r[2 ].key=35;
+		A[i].r[3 ].key=37;
+		A[i].r[4 ].key=49;
+		A[i].r[5 ].key=63;
+		A[i].r[6 ].key=30;
+		A[i].r[7 ].key=81;
+		A[i].r[8 ].key=70;
+		A[i].r[9 ].key=54;
+		A[i].r[10].key=46;
+		A[i].r[11].key=15;
+		A[i].r[12].key=70;
+		A[i].r[13].key=71;
+		A[i].r[14].key=12;
+		A[i].r[15].key=65;
+		A[i].r[16].key=20;
+		A[i].r[17].key=27;
+		A[i].r[18].key=86;
+		A[i].r[19].key=44;
+		A[i].r[20].key=22;
 	}
-	
+	//49 38 65 49 76 13 27 52
+	//35 35 37 49 63 30 81 70 54 46 15 70 71 12 65 20 27 86 44 22
+	//25 32 98 50 35 86 61 27 92 28 67 75 96 11 19 85 94 85 92 76
 	//------------------------------------------------------- 
 	printf("—°‘Ò≈≈–Ú\n");
-	cout<<"≈≈–Ú«∞"<<endl; 
+	cout<<"≈≈–Ú«∞:"; 
 	for(int i=1;i<=m; i++){
-		cout<<A[0].r[i].key<<"  "<<endl;
+		cout<<A[0].r[i].key<<" ";
 	}
 	SelectSort(A[0]);
-	cout<<"≈≈–Ú∫Û"<<endl;
+	cout<<endl; 
+	cout<<"≈≈–Ú∫Û:";
 	for(int i=1;i<=m; i++){
-		cout<<A[0].r[i].key<<"  "<<endl;
+		cout<<A[0].r[i].key<<" ";
 	}
-	
+	cout<<endl; 
 	
 	//-------------------------------------------------------- 
 	printf("\n\n\n≤Â»Î≈≈–Ú\n");
-	cout<<"≈≈–Ú«∞"<<endl; 
+	cout<<"≈≈–Ú«∞:"; 
 	for(int i=1;i<=m; i++){
-		cout<<A[1].r[i].key<<"  "<<endl;
+		cout<<A[1].r[i].key<<" ";
 	}
 	InsertSort(A[1]);
-	cout<<"≈≈–Ú∫Û"<<endl;
+	cout<<endl; 
+	cout<<"≈≈–Ú∫Û:";
 	for(int i=1;i<=m; i++){
-		cout<<A[1].r[i].key<<"  "<<endl;
+		cout<<A[1].r[i].key<<" ";
 	}
+	cout<<endl; 
 	
 	//------------------------------------------------------- 
 	printf("\n\n\n√∞≈›≈≈–Ú\n");
-	cout<<"≈≈–Ú«∞"<<endl; 
+	cout<<"≈≈–Ú«∞:"; 
 	for(int i=1;i<=m; i++){
-		cout<<A[2].r[i].key<<"  "<<endl;
+		cout<<A[2].r[i].key<<" ";
 	}
 	BubbleSort(A[2]);
-	cout<<"≈≈–Ú∫Û"<<endl;
+	cout<<endl; 
+	cout<<"≈≈–Ú∫Û:";
 	for(int i=1;i<=m; i++){
-		cout<<A[2].r[i].key<<"  "<<endl;
+		cout<<A[2].r[i].key<<" ";
 	}
-	
+	cout<<endl; 
 	
 	//------------------------------------------------------- 
 	printf("\n\n\nøÏÀŸ≈≈–Ú\n");
-	cout<<"≈≈–Ú«∞"<<endl; 
+	cout<<"≈≈–Ú«∞:"; 
 	for(int i=1;i<=m; i++){
-		cout<<A[3].r[i].key<<"  "<<endl;
+		cout<<A[3].r[i].key<<" ";
 	}
 	QuickSort(A[3]);
-	cout<<"≈≈–Ú∫Û"<<endl;
+	cout<<endl; 
+	cout<<"≈≈–Ú∫Û:";
 	for(int i=1;i<=m; i++){
-		cout<<A[3].r[i].key<<"  "<<endl;
+		cout<<A[3].r[i].key<<" ";
 	}
-	
+	cout<<endl; 
 	
 	//------------------------------------------ 
 	printf("\n\n\nπÈ≤¢≈≈–Ú\n");
-	cout<<"≈≈–Ú«∞"<<endl; 
+	cout<<"≈≈–Ú«∞:";  
 	for(int i=1;i<=m; i++){
-		cout<<A[4].r[i].key<<"  "<<endl;
+		cout<<A[4].r[i].key<<" ";
 	}
 	MergeSort(A[4]);
-	cout<<"≈≈–Ú∫Û"<<endl;
+	cout<<endl; 
+	cout<<"≈≈–Ú∫Û:";
 	for(int i=1;i<=m; i++){
-		cout<<A[4].r[i].key<<"  "<<endl;
+		cout<<A[4].r[i].key<<" ";
 	}
+	cout<<endl; 
 	
 	//------------------------------------------ 
 	printf("\n\n\n∂—≈≈–Ú\n");
-	cout<<"≈≈–Ú«∞"<<endl; 
+	cout<<"≈≈–Ú«∞:"; 
 	for(int i=1;i<=m; i++){
-		cout<<A[5].r[i].key<<"  "<<endl;
+		cout<<A[5].r[i].key<<" ";
 	}
 	HeadSort(A[5]);
-	cout<<"≈≈–Ú∫Û"<<endl;
+	cout<<endl; 
+	cout<<"≈≈–Ú∫Û:";
 	for(int i=1;i<=m; i++){
-		cout<<A[5].r[i].key<<"  "<<endl;
+		cout<<A[5].r[i].key<<" ";
 	}
+	cout<<endl; 
 	
 	//------------------------------------------ 
 	printf("\n\n\nª˘ ˝≈≈–Ú\n");
-	cout<<"≈≈–Ú«∞"<<endl; 
+	cout<<"≈≈–Ú«∞:"; 
 	for(int i=1;i<=m; i++){
-		cout<<A[6].r[i].key<<"  "<<endl;
+		cout<<A[6].r[i].key<<" ";
 	}
 	RadixSort(A[6]);
-	cout<<"≈≈–Ú∫Û"<<endl;
+	cout<<endl; 
+	cout<<"≈≈–Ú∫Û:";
 	for(int i=1;i<=m; i++){
-		cout<<A[6].r[i].key<<"  "<<endl;
+		cout<<A[6].r[i].key<<" ";
 	}
+	cout<<endl; 
 	
 	
 	//------------------------------------------ 
 	printf("\n\n\nº∆ ˝≈≈–Ú\n");
-	cout<<"≈≈–Ú«∞"<<endl; 
+	cout<<"≈≈–Ú«∞:"; 
 	for(int i=1;i<=m; i++){
-		cout<<A[7].r[i].key<<"  "<<endl;
+		cout<<A[7].r[i].key<<" ";
 	}
 	CountingSort(A[7]);
-	cout<<"≈≈–Ú∫Û"<<endl;
+	cout<<endl; 
+	cout<<"≈≈–Ú∫Û:";
 	for(int i=1;i<=m; i++){
-		cout<<A[7].r[i].key<<"  "<<endl;
+		cout<<A[7].r[i].key<<" ";
 	}
+	cout<<endl; 
 	
 	
 	//------------------------------------------ 
 	printf("\n\n\nœ£∂˚≈≈–Ú\n");
-	cout<<"≈≈–Ú«∞"<<endl; 
+	cout<<"≈≈–Ú«∞:";  
 	for(int i=1;i<=m; i++){
-		cout<<A[8].r[i].key<<"  "<<endl;
+		cout<<A[8].r[i].key<<" ";
 	}
 	ShellSort(A[8]);
-	cout<<"≈≈–Ú∫Û"<<endl;
+	cout<<endl; 
+	cout<<"≈≈–Ú∫Û:";
 	for(int i=1;i<=m; i++){
-		cout<<A[8].r[i].key<<"  "<<endl;
+		cout<<A[8].r[i].key<<" ";
 	}
+	cout<<endl; 
 	
 	free(A);
 }

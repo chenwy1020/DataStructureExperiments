@@ -8,6 +8,8 @@
 
 using namespace std; 
 const int MAXSIZE=100;
+const bool TRUE=1;
+const bool FALSE=0; 
 
 typedef int ElemType;
  
@@ -26,6 +28,7 @@ void coutMat(int** M,int m, int n);
 void coutTSMat(TSMatrix MS);
 void createRpos(TSMatrix MS,int* rpos);
 void FastTransposeTSMatrix(TSMatrix MS,TSMatrix &TS);
+bool Matrix_Addition(TSMatrix A, TSMatrix B, TSMatrix &C);
 
  
 int main(){
@@ -33,7 +36,7 @@ int main(){
 	int m=3,n=3;
 	int** M=new int*[m];
 	int** T=new int*[m];
-	TSMatrix MS,TS;
+	TSMatrix MS,TS,QS;
 	
 	//初始化 
 	for(int i=0;i<m;i++){
@@ -41,14 +44,17 @@ int main(){
 		T[i]=new int[n];
 	}
 	MS.mu=m;	MS.nu=n;
-	TS.mu=n;	TS.nu=m;
+	TS.mu=m;	TS.nu=n;
 	for(int p=0;p<m;p++){
 		for(int q=0;q<n;q++){
 			M[p][q]=0;
+			T[p][q]=0;
 		}
 		M[p][p]=p+1;
+		T[p][p]=p+2;
 	}
 	M[0][n-1]=1;
+	T[m-1][0]=1;
 	
 	//以三元组 形式存储
 	TSMattrans(M,MS,m,n);
@@ -56,20 +62,20 @@ int main(){
 	cout<<"MSMatrix = "<<endl;
 	coutTSMat(MS);
 	
-	//一般矩阵转置
-	transpose(M,T,m,n);
 	TSMattrans(T,TS,m,n);
 	coutMat(T,m,n);
 	cout<<"TSMatrix = "<<endl;
 	coutTSMat(TS);
-	
+	/*
 	//稀疏矩阵装置 
 	FastTransposeTSMatrix(MS,TS);
 	cout<<"TSMatrix = "<<endl;
 	coutTSMat(TS);
+	*/
 	
-	
-	
+	Matrix_Addition(MS,TS,QS);
+	cout<<"QSMatrix = "<<endl;
+	coutTSMat(QS);
 	//销毁矩阵 
 	for(int p=0;p<m;p++){
 		delete[] M[p];
@@ -139,6 +145,94 @@ void FastTransposeTSMatrix(TSMatrix MS,TSMatrix &TS){
 	}//if
 	
 }
+
+// 三元组存储的稀疏矩阵求和算法: C=A+B 
+bool Matrix_Addition(TSMatrix A, TSMatrix B, TSMatrix &C){
+	int row_a, row_b,col_a, col_b, index_a, index_b, index_c;
+	//A元素的行号，B元素的行号，A元素的列号，B元素的列号，ABC矩阵三元组的地址
+ 
+	//同类型矩阵才能相加
+	if(A.mu!=B.mu || A.nu!=B.nu) return FALSE;
+	C.mu = A.mu;	C.nu = A.nu;
+ 
+	//同时遍历两个三元组，开始都为1，因为0位置未存元素，当A或者B中其一元素取完循环终止
+	for(index_a=1,index_b=1,index_c=1; index_a<=A.tu&&index_b<=B.tu; ){
+		//获取行列号 
+		row_a = A.data[index_a].i;	col_a = A.data[index_a].j;
+		row_b = B.data[index_b].i;	col_b = B.data[index_b].j;
+		
+		//依行号访问稀疏矩阵 
+		if(row_a>row_b){
+			//B的行号小 则复制B到C
+			C.data[index_c].i = B.data[index_b].i;
+			C.data[index_c].j = B.data[index_b].j;
+			C.data[index_c].e = B.data[index_b].e;
+			//向后步进 
+			index_b++;
+			index_c++;
+		}
+		else if(row_a<row_b){
+			//A的行号小 则复制A到C
+			C.data[index_c].i = A.data[index_a].i;
+			C.data[index_c].j = A.data[index_a].j;
+			C.data[index_c].e = A.data[index_a].e;
+			//向后步进 
+			index_a++;
+			index_c++;
+		}
+		else{
+			//若同行，则开始依列号访问稀疏矩阵 
+			if(col_a>col_b){
+				//B的列号小，复制B到C
+				C.data[index_c].i = B.data[index_b].i;
+				C.data[index_c].j = B.data[index_b].j;
+				C.data[index_c].e = B.data[index_b].e;
+				//向后步进 
+				index_b++;
+				index_c++;
+			}
+			else if(col_a<col_b){
+				//A的列号小，复制A到C
+				C.data[index_c].i = A.data[index_a].i;
+				C.data[index_c].j = A.data[index_a].j;
+				C.data[index_c].e = A.data[index_a].e;
+				//向后步进 
+				index_a++;
+				index_c++;
+			}
+			else{
+				//行列号相同 ,需判断元素相加是否为零
+				if((A.data[index_a].e+B.data[index_b].e)){
+					C.data[index_c].i = A.data[index_a].i;
+					C.data[index_c].j = A.data[index_a].j;
+					C.data[index_c].e = A.data[index_a].e + B.data[index_b].e;
+					index_c++;
+				}
+				//向后步进 
+				index_a++;
+				index_b++;
+			}
+		}
+	}
+ 	//B取完A未取完
+	while (index_a <= A.tu){
+		C.data[index_c].i = A.data[index_a].i;
+		C.data[index_c].j = A.data[index_a].j;
+		C.data[index_c].e = A.data[index_a].e;
+		index_a++;
+		index_c++;
+	}
+ 	//A取完B未取完
+	while (index_b <= B.tu){
+		C.data[index_c].i = B.data[index_b].i;
+		C.data[index_c].j = B.data[index_b].j;
+		C.data[index_c].e = B.data[index_b].e;
+		index_b++;
+		index_c++;
+	}
+	C.tu = index_c - 1;
+}
+
 
 //矩阵输出
 void coutMat(int** M,int m, int n){

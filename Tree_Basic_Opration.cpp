@@ -37,7 +37,10 @@ typedef struct BiThrNode{
 
 void CreatebiTree(BiTree &T);
 void BiTreeDepth(BiTree T,int h,int &depth);
+int Get_Depth(BiTree T);
 BiTNode *GetTreeNode(TElemType iten,BiTNode *lptr,BiTNode *rptr);
+int Get_Sub_Depth(BiTree T,TElemType x, int &depth); 
+int LeafCount(BiTree T);
 BiTNode *CopyTree(BiTree T);
 double value(BiTree T,float *opnd);
 
@@ -90,6 +93,18 @@ int main(){
 	cout<<"树的深度为："<<depth<<endl;
 	cout<<endl;
 
+	//二叉树的叶子结点个数
+	cout<<"叶子结点个数:";
+	cout<<LeafCount(T)<<endl;
+	cout<<endl;
+	
+	//条件子树的深度
+	cout<<"以X为根的树的深度："; 
+	Get_Sub_Depth(T,'B',depth);
+	cout<<depth<<endl;
+	cout<<endl;
+	
+
 	//----------------------------------------------------
 	//复制一棵二叉树
 	S=CopyTree(T);
@@ -97,6 +112,8 @@ int main(){
 	Preorder(S, visit);
 	cout<<endl;
 	cout<<endl;
+	
+	
 	
 	/*
 	//----------------------------------------------------
@@ -139,6 +156,43 @@ void BiTreeDepth(BiTree T,int h,int &depth){
 		BiTreeDepth(T->rchild,h+1,depth);
 	}
 }//BiTreeDepth
+
+//求子树深度的递归算法
+int Get_Depth(BiTree T) {
+	int m,n;
+	if(!T)  
+		return 0;
+	else {
+		m=Get_Depth(T->lchild);     
+		n=Get_Depth(T->rchild);    
+		return (m>n?m:n)+1;   
+	}
+} //Get_Depth 
+
+
+
+int Get_Sub_Depth(BiTree T,TElemType x, int &depth){
+
+	if(T->data==x){
+		depth=Get_Depth(T); 
+		return 0;
+	}
+	else{
+		if(T->lchild)  
+			Get_Sub_Depth(T->lchild,x,depth);   
+		if(T->rchild) 
+			Get_Sub_Depth(T->rchild,x,depth); 
+   }  
+}
+
+//求二叉树中叶子结点的数目
+int LeafCount(BiTree T){
+	if(!T)  return 0; 
+	else if(!T->lchild && !T->rchild) 
+    	return 1; 
+	else return LeafCount(T->lchild)+LeafCount(T->rchild);
+
+} //LeafCount
 
 //复制一棵二叉树
 //复制左右子树，组装为树 
@@ -299,7 +353,7 @@ bool treeEmpty(BiTree T){
 }
 
 //全线索链表的中序遍历算法 
-void Inorder(BiThrTree H,void (*visit2)(BiTree)){
+void Inorder(BiThrTree H,void (*visit2)(BiThrTree)){
 	BiThrNode *p;
 	p=H->succ;
 	while(p!=H){
